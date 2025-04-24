@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strive</title>
+    <link rel="icon" href="images.png">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.85/build/spline-viewer.js"></script>
+<!--     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.75/build/spline-viewer.js"></script> -->
+    <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.71/build/spline-viewer.js"></script> -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.71/build/spline-viewer.js"></script>
+    <style>
+        body { 
+            margin: 0;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            height: 500vh;
+            width: 100%;
+        }
+        .robo{ width: 100vw; height: 100vh; }
+        .focus{
+            height: 400px;
+            width: 100vw;
+            margin-left: 100px;
+        }
+        .navbar {
+            background-color: #000;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .popbox {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .menu ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #f6f3f3;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover, .menu .homiebaba {
+            background: linear-gradient(45deg,#515BD4,#8134AF, #DD2A7B,  #F58529 );
+            color: white;
+        }
+
+        .userbtn {
+            position: relative;
+        }
+
+        .userbtn button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .userbtn img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .dropbtn {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .dropbtn-header {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dropbtn-header .name {
+            font-weight: bold;
+        }
+
+        .dropbtn-header .email {
+            font-size: 0.9rem;
+            color: gray;
+        }
+
+        .dropbtn ul {
+            padding: 10px 0;
+        }
+
+        .dropbtn ul li {
+            padding: 8px 15px;
+        }
+
+        .dropbtn ul li a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .dropbtn ul li a:hover {
+            background: #f0f0f0;
+        }
+
+        .userbtn:hover .dropbtn {
+            display: block;
+        }
+        @media screen and (max-width: 768px) {
+            .menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: black;
+                border-radius: 5px;
+                width: 200px;
+                flex-direction: column;
+                text-align: center;
+                padding: 10px 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .menu.show {
+                display: flex;
+            }
+        }
+        .about {
+            display: flex;
+            flex-direction: col;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust as needed */
+        }
+        .dabba {
+            text-align: center;
+            position: absolute;
+            top: 150%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin: 0;
+            color: #ffffff;
+        }
+        p {
+            font-size: 1em;
+            font-weight: 400;
+            color: #8f8e8e;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+        .mac img{
+            width: 90%;
+            height: 90%;
+            margin-left: 5%;
+            margin-top: 0;
+        }
+        .khokha {
+            text-align: center;
+            max-width: 800px;
+            margin: 20px;
+            margin-left: 25%;
+            margin-top: 10%;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        .header p {
+            font-size: 16px;
+            color: #a09e9e;
+        }
+        .scdule {
+            display: flex;
+            justify-content: space-between;
+            background-color: #000000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .col {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .col h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .col h2 i {
+            margin-right: 10px;
+        }
+        .morning h2 {
+            background-color: #4285f4;
+        }
+        .noon h2 {
+            background-color: #fbbc05;
+        }
+        .night h2 {
+            background-color: #a142f4;
+        }
+        .task {
+            border: 2px solid;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .morning .task {
+            border-color: #4285f4;
+        }
+        .noon .task {
+            border-color: #fbbc05;
+        }
+        .night .task {
+            border-color: #a142f4;
+        }
+        .task h3 {
+            font-size: 16px;
+            margin: 0 0 5px 0;
+            color: white;
+        }
+        .task p {
+            font-size: 14px;
+            color: #a09e9e;
+            margin: 0;
+        }
+        .p:hover{
+            background-color: #492865;
+        }
+        .y:hover{
+            background-color: #866503e0;
+        }
+        .b:hover{
+            background-color: #163f81;
+        }
+        @media (max-width: 768px) {
+            .scdule {
+                flex-direction: col;
+            }
+            .col {
+                margin: 10px 0;
+            }
+            .khokha{
+                margin: 10px 0;
+            }
+        }
+        .container4 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            margin-top: 0;
+            margin-top: 7%;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        .guides {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        .guide {
+            max-width: 300px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            padding: 25px 20px;
+            padding-top: 0;
+            border-radius: 10px;
+        }
+        .guide:hover{
+            background-color: #1d1c1c;
+        }
+        .guide h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color:white;
+        }
+        .guide p {
+            font-size: 16px;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .guides {
+                flex-direction: col;
+                align-items: center;
+            }
+            .guide {
+                max-width: 100%;
+            }
+        }
+        .footer {
+            background-color: #000000;
+            padding: 20px 0;
+            color: #fdfdfd;
+            margin-top: 20%;
+            margin-left: 10%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            width: 20%;
+        }
+
+        .footer-section h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            text-decoration: none;
+            color: #747373;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #999696;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .fott{
+            background: linear-gradient(2deg, #515BD4, #8134AF, #DD2A7B, #F58529);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .black{
+            background-color: rgb(0, 0, 0);
+            height: 50px;
+            width: 180px;
+            position: absolute;
+            top: 82%;
+            left: 89%;
+            z-index: 1000;
+        }
+        .black2{
+            background-color: rgb(0, 0, 0);
+            height: 200px;
+            width: 300px;
+            position: absolute;
+            top: 470%;
+            left: 90%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <nav class="navbar">
+            <div class="popbox">
+                <a href="https://flowbite.com/" class="logo">
+                    <img src="images.png" alt="Flowbite Logo">
+                    <span>Strive</span>
+                </a>
+                <div class="menu">
+                    <ul>
+                        <li><a href="#" class="homiebaba">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Habits</a></li>
+                        <li><a href="#">Premium</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="userbtn">
+                    <button id="userbtn">
+                        <img src="WhatsApp Image 2025-02-26 at 00.05.08.jpeg" alt="User Photo">
+                    </button>
+                    <div class="dropbtn" id="user-dropbtn">
+                        <div class="dropbtn-header">
+                            <span class="name">Rudraksh</span>
+                            <span class="email">rudraksh@gmail.com</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">Earnings</a></li>
+                            <li><a href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="black"></div>
+        <!-- <spline-viewer class="robo" url="https://prod.spline.design/OjX4yTT-sy7YkIhH/scene.splinecode"></spline-viewer> -->
+<!--         <spline-viewer url="https://prod.spline.design/fuUty-LIA1-5SGPg/scene.splinecode"></spline-viewer> -->
+        <spline-viewer url="https://prod.spline.design/fuUty-LIA1-5SGPg/scene.splinecode"></spline-viewer>
+        
+        <div class="about">
+            <div class="dabba">
+                <h1>Build Better Habits,<br>Build a Better Life</h1>
+                <p>Harness the power of our personalized habit tracker app to streamline your everyday routines and achieve your goals.</p>
+                <a href="#" class="btn">Try Strive Free</a>
+            </div>
+        </div>
+       
+        <div class="mac">
+            <img src="mac.png" alt="">
+        </div>
+        <div class="khokha">
+            <div class="header">
+             <img alt="Icon representing organization" height="50" src="images.png" width="50"/>
+             <h1>
+              Organize, Execute, Triumph
+             </h1>
+             <p>
+              Start your day right with a clear, organized schedule that keeps you on track for success. Here’s an example of how your day with Strive could look:
+             </p>
+            </div>
+            <div class="scdule">
+             <div class="col morning">
+              <h2>
+               <i class="fas fa-sun">
+               </i>
+               Morning
+              </h2>
+              <div class="task b">
+               <h3>
+                Run
+               </h3>
+               <p>
+                8 AM
+               </p>
+              </div>
+              <div class="task b">
+               <h3>
+                Meditate
+               </h3>
+               <p>
+                8:30 AM
+               </p>
+              </div>
+              <div class="task b">
+               <h3>
+                Plan the day
+               </h3>
+               <p>
+                9 AM
+               </p>
+              </div>
+              <div class="task b">
+               <h3>
+                Read
+               </h3>
+               <p>
+                10 AM
+               </p>
+              </div>
+              <div class="task b">
+               <h3>
+                Hydrate
+               </h3>
+               <p>
+                9:30 AM
+               </p>
+              </div>
+             </div>
+             <div class="col noon">
+              <h2>
+               <i class="fas fa-sun">
+               </i>
+               Noon
+              </h2>
+              <div class="task y">
+               <h3>
+                Healthy Lunch
+               </h3>
+               <p>
+                12 PM
+               </p>
+              </div>
+              <div class="task y">
+               <h3>
+                Connect with a colleague
+               </h3>
+               <p>
+                2 PM
+               </p>
+              </div>
+              <div class="task y">
+               <h3>
+                Express gratitude
+               </h3>
+               <p>
+                4 PM
+               </p>
+              </div>
+             </div>
+             <div class="col night">
+              <h2>
+               <i class="fas fa-moon">
+               </i>
+               Night
+              </h2>
+              <div class="task p">
+               <h3>
+                Reflect
+               </h3>
+               <p>
+                8 PM
+               </p>
+              </div>
+              <div class="task p">
+               <h3>
+                Wind Down
+               </h3>
+               <p>
+                9 PM
+               </p>
+              </div>
+              <div class="task p">
+               <h3>
+                Disconnect from screens
+               </h3>
+               <p>
+                9:30 PM
+               </p>
+              </div>
+              <div class="task p">
+               <h3>
+                Prepare for tomorrow
+               </h3>
+               <p>
+                10 PM
+               </p>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="container4">
+            <h1>Productivity guides</h1>
+            <div class="guides">
+                <div class="guide">
+                    <h2>Time management tips <i class="fas fa-arrow-right"></i></h2>
+                    <p>List of 58 tips for better time management.</p>
+                </div>
+                <div class="guide">
+                    <h2>Time management techniques <i class="fas fa-arrow-right"></i></h2>
+                    <p>List of 19 best techniques for improving productivity.</p>
+                </div>
+                <div class="guide">
+                    <h2>Timeboxing <i class="fas fa-arrow-right"></i></h2>
+                    <p>Time management technique for increasing productivity.</p>
+                </div>
+                <div class="guide">
+                    <h2>Daily routines and habits <i class="fas fa-arrow-right"></i></h2>
+                    <p>How highly productive people spend their time.</p>
+                </div>
+                <div class="guide">
+                    <h2>Student productivity guide <i class="fas fa-arrow-right"></i></h2>
+                    <p>Time management and organizing tips for students.</p>
+                </div>
+                <div class="guide">
+                    <h2>Freelance productivity guide <i class="fas fa-arrow-right"></i></h2>
+                    <p>Time management and organizing tips for freelancers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="black2"></div>
+        <spline-viewer class="focus" url="https://prod.spline.design/AxJoQyw6ea98BNKE/scene.splinecode"></spline-viewer>
+        <footer class="footer">
+            <h1 class="fott">Strive</h1>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h2>Company</h2>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Brand Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h2>Help center</h2>
+                    <ul>
+                        <li><a href="#">Discord Server</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h2>Legal</h2>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Licensing</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h2>Download</h2>
+                    <ul>
+                        <li><a href="#">iOS</a></li>
+                        <li><a href="#">Android</a></li>
+                        <li><a href="#">Windows</a></li>
+                        <li><a href="#">MacOS</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Strive™. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+        document.getElementById('nav-menu').classList.toggle('show');
+    });
+
+    </script>
+</body>
+</html>
